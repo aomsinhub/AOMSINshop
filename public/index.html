@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shopping</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.15.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.15.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/9.15.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+          <a href="market.html">
+              <img class="product-img" src="./imgs/logo.png" class="logoweb">
+          </a>
+          <div class="nav-profile">
+              <p class="nav-user-name">User</p>
+              <div onclick="openCart()" style="cursor: pointer;" class="nav-profile-cart">
+                  <i class="fas fa-cart-shopping"></i>
+                  <div id="cartcount" class="cartcount" style="display: none;">
+                      0
+                  </div>
+              </div>
+          </div>
+      </div>
+  </nav>
+
+  <div class="container">
+      <div class="sidebar">
+          <input onkeyup="search(this)" id="text-search" type="text" class="sidebar-search" placeholder="Search">
+          <div class="menu">
+              <a onclick="searchproduct('all')" class="sidebar-item">
+                  All
+              </a>
+              <a onclick="searchproduct('shoe')" class="sidebar-item">
+                  Shoe
+              </a>
+              <a onclick="searchproduct('camera')" class="sidebar-item">
+                  Camera
+              </a>
+              <a onclick="searchproduct('glasses')" class="sidebar-item">
+                  Glasses
+              </a>
+          </div>
+      </div>
+      <div id="productlist" class="product"></div>
+  </div>
+
+  <div id="modaldetail" class="modal" style="display: none;">
+      <div onclick="closemodal()" class="modal-bg"></div>
+      <div class="modal-page">
+          <h2>Detail</h2>
+          <br/>
+          <div class="modal-content">
+              <img id="mdd-img" class="modal-img" src="https://media.istockphoto.com/id/1308274455/photo/blue-sneakers-isolated-on-white-background.jpg?b=1&s=170667a&w=0&k=20&c=BAAB67D78Mx7GgyUPnTVA01z2xrY6Hj0rJ_O6swbNvY=" alt="">
+              <div class="detail-text">
+                  <p id="mdd-name" style="font-size: 1.5vw;">Product name</p>
+                  <p id="mdd-price" style="font-size: 1.2vw;">500 THB</p>
+                  <br/>
+                  <p id="mdd-desc" style="color: #adadad;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente tenetur non doloremque quis ut repellendus odio, explicabo dolorum inventore labore? Deserunt soluta facilis rerum sed perferendis officia neque assumenda expedita.</p>
+                  <div class="btn-control">
+                      <button onclick="closemodal()" class="btn">
+                          Close
+                      </button>
+                      <button onclick="addtocart()" class="btn btn-buy">
+                          Add to cart
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div id="modalcart" class="modal" style="display: none;">
+      <div onclick="closemodal()" class="modal-bg"></div>
+      <div class="modal-page">
+          <h2>My cart</h2>
+          <br/>
+          <div id="mycart" class="cartlist">
+          </div>
+              <div class="btn-control">
+              <button onclick="closemodal()" class="btn">
+                  Cancel
+              </button>
+              <button class="btn btn-buy">
+                  Buy
+              </button>
+          </div>
+      </div>
+  </div>
+  </body>
+</html>
